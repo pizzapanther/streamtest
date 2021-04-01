@@ -21,8 +21,17 @@
   <script src="video.min.js"></script>
   <script src="videojs-http-streaming.min.js"></script>
   <script>
-    var player = videojs('vid1', {fill: true, aspectRatio: '16:9', autoplay: true});
-    // player.play();
+    var player = videojs('vid1', {fill: true, aspectRatio: '16:9'});
+    player.ready(function() {
+      var promise = player.play();
+      if (promise !== undefined) {
+        promise.then(function() {
+          console.log('player started');
+        }).catch(function(error) {
+          console.log(error);
+        });
+      }
+    });
   </script>
 </body>
 </html>
